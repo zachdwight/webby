@@ -60,7 +60,7 @@ def parse_log_file(log_file_path, output_csv_path):
             for ip in unique_ips:
                 location = get_ip_location(ip)
                 if location:
-                    city, country, org = location
+                    city, country, org, orgname = location
                     csv_writer.writerow([ip, city, country, org, orgname])
                 else:
                     csv_writer.writerow([ip, "Unknown", "Unknown", "Unknown", "Unknown"])
