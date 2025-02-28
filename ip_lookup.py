@@ -20,7 +20,8 @@ def get_ip_location(ip_address):
             city = data.get("city", "Unknown")
             country = data.get("country", "Unknown")
             org = data.get("org", "Unknown")
-            return city, country, org
+            orgname = data.get("asname","Unknown")
+            return city, country, org, orgname
         else:
             print(f"IP geolocation API error: {data['message']}")
             return None
@@ -54,15 +55,15 @@ def parse_log_file(log_file_path, output_csv_path):
 
         with open(output_csv_path, "w", newline="") as csvfile:
             csv_writer = csv.writer(csvfile)
-            csv_writer.writerow(["IP Address", "City", "Country", "Organization"])  # Write header
+            csv_writer.writerow(["IP Address", "City", "Country", "Organization", "ASName"])  # Write header
 
             for ip in unique_ips:
                 location = get_ip_location(ip)
                 if location:
                     city, country, org = location
-                    csv_writer.writerow([ip, city, country, org])
+                    csv_writer.writerow([ip, city, country, org, orgname])
                 else:
-                    csv_writer.writerow([ip, "Unknown", "Unknown", "Unknown"])
+                    csv_writer.writerow([ip, "Unknown", "Unknown", "Unknown", "Unknown"])
 
     except FileNotFoundError:
         print(f"Error: Log file not found at {log_file_path}")
