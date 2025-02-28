@@ -20,7 +20,7 @@ def get_ip_location(ip_address):
             city = data.get("city", "Unknown")
             country = data.get("country", "Unknown")
             org = data.get("org", "Unknown")
-            orgname = data.get("asname","Unknown")
+            orgname = data.get("as","Unknown")
             return city, country, org, orgname
         else:
             print(f"IP geolocation API error: {data['message']}")
